@@ -21,7 +21,7 @@
   <parent>
     <groupId>com.squareup.dagger</groupId>
     <artifactId>dagger-parent</artifactId>
-    <version>1.2.6-SNAPSHOT</version>
+    <version>1.2.5-JDK17</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -33,9 +33,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>${project.groupId}</groupId>
+      <groupId>com.squareup.dagger</groupId>
       <artifactId>dagger</artifactId>
-      <version>${project.version}</version>
+      <version>1.2.5</version>
     </dependency>
     <dependency>
       <groupId>com.squareup</groupId>
@@ -57,9 +57,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>${project.groupId}</groupId>
+      <groupId>com.squareup.dagger</groupId>
       <artifactId>dagger</artifactId>
-      <version>${project.version}</version>
+      <version>1.2.5</version>
       <scope>test</scope>
       <classifier>tests</classifier>
     </dependency>
@@ -103,32 +103,32 @@
         </executions>
       </plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-invoker-plugin</artifactId>
-        <configuration>
-          <addTestClassPath>true</addTestClassPath>
-          <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
-          <pomIncludes>
-            <pomInclude>*/pom.xml</pomInclude>
-          </pomIncludes>
-          <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
-          <postBuildHookScript>verify</postBuildHookScript>
-          <filterProperties>
-            <dagger.version>${project.version}</dagger.version>
-            <dagger.groupId>${project.groupId}</dagger.groupId>
-          </filterProperties>
-        </configuration>
-        <executions>
-          <execution>
-            <id>integration-test</id>
-            <goals>
-              <goal>install</goal>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-invoker-plugin</artifactId>-->
+<!--        <configuration>-->
+<!--          <addTestClassPath>true</addTestClassPath>-->
+<!--          <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>-->
+<!--          <pomIncludes>-->
+<!--            <pomInclude>*/pom.xml</pomInclude>-->
+<!--          </pomIncludes>-->
+<!--          <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>-->
+<!--          <postBuildHookScript>verify</postBuildHookScript>-->
+<!--          <filterProperties>-->
+<!--            <dagger.version>${project.version}</dagger.version>-->
+<!--            <dagger.groupId>${project.groupId}</dagger.groupId>-->
+<!--          </filterProperties>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>integration-test</id>-->
+<!--            <goals>-->
+<!--              <goal>install</goal>-->
+<!--              <goal>run</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

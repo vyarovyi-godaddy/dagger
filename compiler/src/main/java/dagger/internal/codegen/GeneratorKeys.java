@@ -25,6 +25,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
 
+import static dagger.internal.codegen.InjectAdapterProcessor.jdkSourceCompatibility;
 import static dagger.internal.codegen.Util.rawTypeToString;
 import static dagger.internal.codegen.Util.typeToString;
 
@@ -91,16 +92,24 @@ final class GeneratorKeys {
 
   private static void qualifierToString(AnnotationMirror qualifier, StringBuilder result) {
     // TODO: guarantee that element values are sorted by name (if there are multiple)
-    result.append('@');
-    typeToString(qualifier.getAnnotationType(), result, '$');
-    result.append('(');
-    for (Map.Entry<? extends ExecutableElement, ? extends AnnotationValue> entry
-        : qualifier.getElementValues().entrySet()) {
-      result.append(entry.getKey().getSimpleName());
-      result.append('=');
-      result.append(entry.getValue().getValue());
+    // TODO: fix for the project that uses JDK15+ where Annotation.toString() has been changed.
+    if (jdkSourceCompatibility >= 15) {
+      // JDK 15 breaking change:
+      // Make javac's toString() on annotation objects consistent with core reflection
+      // https://bugs.openjdk.org/browse/JDK-8225356
+      result.append(qualifier.toString()).append("/");
+    } else {
+      result.append('@');
+      typeToString(qualifier.getAnnotationType(), result, '$');
+      result.append('(');
+      for (Map.Entry<? extends ExecutableElement, ? extends AnnotationValue> entry
+              : qualifier.getElementValues().entrySet()) {
+        result.append(entry.getKey().getSimpleName());
+        result.append('=');
+        result.append(entry.getValue().getValue());
+      }
+      result.append(")/");
     }
-    result.append(")/");
   }
 
   /** Does not test for multiple qualifiers. This is tested in {@code ValidationProcessor}.  */

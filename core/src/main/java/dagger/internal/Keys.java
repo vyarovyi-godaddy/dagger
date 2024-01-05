@@ -75,7 +75,19 @@ public final class Keys {
     }
     StringBuilder result = new StringBuilder();
     if (annotation != null) {
-      result.append(annotation).append("/");
+      // Hack for JDK15+.
+      // Compiler creates annotation using old naming convention:
+      // @javax.inject.Named(value=name)
+      // For JKD15+ it uses new naming convention:
+      // @javax.inject.Named("default_client")
+      // so we need to fix the naming to be the same as it was generated
+      String annotationStr = annotation.toString();
+      if(annotationStr.startsWith("@javax.inject.Named") && !annotationStr.contains("value=")) {
+        annotationStr = annotationStr
+                .replace("\"", "")
+                .replace("@javax.inject.Named(", "@javax.inject.Named(value=");
+      }
+      result.append(annotationStr).append("/");
     }
     typeToString(type, result, true);
     return result.toString();

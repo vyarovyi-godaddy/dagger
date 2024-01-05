@@ -34,6 +34,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.inject.Inject;
@@ -73,7 +74,20 @@ import static javax.lang.model.element.Modifier.STATIC;
  */
 @SupportedAnnotationTypes("javax.inject.Inject")
 public final class InjectAdapterProcessor extends AbstractProcessor {
+
+  public static int jdkSourceCompatibility;
+
   private final Set<String> remainingTypeNames = new LinkedHashSet<String>();
+
+  @Override
+  public synchronized void init(ProcessingEnvironment processingEnv) {
+    super.init(processingEnv);
+    jdkSourceCompatibility = convertToJdkVersion(processingEnv.getSourceVersion());
+  }
+
+  private static int convertToJdkVersion(SourceVersion sourceVersion) {
+    return Integer.parseInt(sourceVersion.name().replaceAll("[\\D.]", ""));
+  }
 
   @Override public SourceVersion getSupportedSourceVersion() {
     return SourceVersion.latestSupported();
