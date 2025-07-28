@@ -20,7 +20,7 @@
   <parent>
     <groupId>com.squareup.dagger.example</groupId>
     <artifactId>dagger-example-parent</artifactId>
-    <version>1.2.5-JDK17</version>
+    <version>1.2.5-firebase</version>
   </parent>
 
   <artifactId>simple</artifactId>
