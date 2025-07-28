@@ -21,7 +21,7 @@
   <parent>
     <groupId>com.squareup.dagger</groupId>
     <artifactId>dagger-parent</artifactId>
-    <version>1.2.5-JDK17</version>
+    <version>1.2.6-firebase</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -35,7 +35,7 @@
     <dependency>
       <groupId>com.squareup.dagger</groupId>
       <artifactId>dagger</artifactId>
-      <version>1.2.5</version>
+      <version>1.2.6</version>
     </dependency>
     <dependency>
       <groupId>com.squareup</groupId>
@@ -59,7 +59,7 @@
     <dependency>
       <groupId>com.squareup.dagger</groupId>
       <artifactId>dagger</artifactId>
-      <version>1.2.5</version>
+      <version>1.2.6</version>
       <scope>test</scope>
       <classifier>tests</classifier>
     </dependency>
